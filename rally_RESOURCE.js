@@ -16,16 +16,17 @@ var params = JSON.parse(req.urlParameters) || {},
 var objectType = params.objectType || data.objectType,
     headers = {
         headers: {
-            'ZSessionID': '_MyAPIKEy'
+            'ZSessionID': '_MyAPIKey'
         }
     },
-    project = '/project/1234567890'; //the project for this demo.  
+    project = '/project/69318792140'; /* project reference for where to create/search for the artifacts */
 
 if (!objectType){
     throw ('objectType parameter required for rally resource.');
 }
 
 var rallyBase = 'https://rally1.rallydev.com/slm/webservice/v2.0/' + objectType;
+log.debug('rallyBaseUrl ' + rallyBase);
 /* TODO - Validate that these are parameters that the Rally API expects */
 if (req.verb === 'GET'){
     var resp = SysUtility.restGet(rallyBase,params,headers);
