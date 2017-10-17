@@ -1,10 +1,10 @@
 # lac-demo
 Instructions for creating a basic Github - Rally PROTOTYPE integration using Live API Creator Demo
 
-Please see (lac-demo.pdf) for integration details 
+Please see (/lac-demo.pdf) for integration details 
 
 ## prerequisites
-Please see lac-demo.pdf for prerequisites
+Please see (/lac-demo.pdf) for prerequisites
 
 ## Build Steps
 1.  Enable moment.js in API Properties > System Libraries 
