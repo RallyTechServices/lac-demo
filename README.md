@@ -1,7 +1,7 @@
 # lac-demo
 Instructions for creating a basic Github - Rally PROTOTYPE integration using Live API Creator Demo
 
-Please see (./lac-demo.pdf) for integration details 
+Please see (lac-demo.pdf) for integration details 
 
 ## prerequisites
 Please see lac-demo.pdf for prerequisites
