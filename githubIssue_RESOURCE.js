@@ -19,12 +19,12 @@ if (req.verb === 'GET'){
 
 
 if (req.verb === 'POST'){
-    var id = params.id;
+    var data = JSON.parse(req.json);
+    var id = data.id;
     if (!id){
         throw ('id parameter required for POST.')
     }
-    var data = JSON.parse(req.json);
-    var resp = utility.doPatch(githubIssueBase + '/' + id, null, headers, data);
+    var resp = SysUtility.restPatch(githubIssueBase + '/' + id, null, headers, data);
     return JSON.parse(resp);
 } 
 
