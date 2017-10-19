@@ -1,11 +1,12 @@
-if (req.verb === 'PUT' && req.resourceName === 'linkedObject'){
+if (req.verb === 'PUT' && req.resourceName === 'github_issue'){
     var data = JSON.parse(json);
     var newData = [];
     for (var i=0; i<data.length; i++){
+        //Add any additional fields to save to resource here.  
         newData.push({
-            "github_id":data[i].number,
-            "github_data":JSON.stringify(data[i]),
-            "@metadata":{"action":"MERGE_INSERT", "key":"github_id"}
+            "id":data[i].number,
+            "name": data[i].name,
+            "@metadata":{"action":"MERGE_INSERT", "key":"id"}
         });
     }
     json = JSON.stringify(newData); 
