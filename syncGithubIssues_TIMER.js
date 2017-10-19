@@ -5,10 +5,10 @@ var authHeaders = {
     "headers":{"Authorization": "CALiveAPICreator gitrlyAdminKey:1"}
 };
 
-var lastRun = '';
+var lastRun = moment().subtract(15, 'minutes');
 
 var params = {
-    "since": lastRun,
+    "since": lastRun.toISOString(),
     "filter":"all",
     "state":"open"
 };
