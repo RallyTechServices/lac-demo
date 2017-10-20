@@ -8,10 +8,10 @@ Please see (https://github.com/RallyTechServices/lac-demo/blob/master/lac-demo.p
 
 ## Build Steps
 1.  Enable moment.js in API Properties > System Libraries 
-2.  Create tables (schema.json):
-      a.  rally_object
-      b.  github_object 
-      c.  webhook (for webhook implementation only)
+2.  Create Object Link table with the following fields:
+      - ac_id (string - 100)
+      - github_id (string - 100)
+      - github_data (text) 
 3.  Create and Test github JAVASCRIPT RESOURCE
       - will need to support GET and POST verbs 
       - see (https://developer.github.com/v3/issues/) for Github API Reference 
@@ -29,4 +29,5 @@ Please see (https://github.com/RallyTechServices/lac-demo/blob/master/lac-demo.p
 10 . Create the TIMER for syncGithubIssues
 11.  Create the TIMER for syncRallyArtifacts 
 
+ 
  
