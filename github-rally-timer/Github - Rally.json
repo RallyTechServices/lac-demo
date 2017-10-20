@@ -1,0 +1,589 @@
+[
+  {
+    "ident": 2200,
+    "ts": "2017-10-16T18:13:57.939+00:00",
+    "exportVersion": "v4",
+    "adminSchemaVersion": "20170930",
+    "name": "Github - Rally",
+    "url_name": "ghbrly",
+    "comments": "Created with a new empty database.\n1. Click Data Explorer on the Navigation Menu (to the left)\n2. In Data Explorer, enter Author Mode (gear on top right; typical login is Admin...)\n3. Create Tables (look for the \"+\" button in the upper left)\nPlease see https://docops.ca.com/ca-live-api-creator/4-0/en/creating-apis/database-creation",
+    "status": null,
+    "is_active": true,
+    "account_ident": 1000,
+    "authprovider_ident": 1000,
+    "@metadata": {
+      "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport/2200",
+      "checksum": "A:0a6fa312a1203a61",
+      "nonpersistent": [
+        "exportVersion",
+        "adminSchemaVersion"
+      ]
+    },
+    "Topics": [],
+    "Rules": [
+      {
+        "ident": 2100,
+        "ts": "2017-10-17T05:59:33.755+00:00",
+        "entity_name": "main:object_link",
+        "attribute_name": null,
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "var data = JSON.parse(row.github_data),\n    authHeaders = {\n        \"headers\":{\n            \"Authorization\":\"CALiveAPICreator GdoHMz3k15YhvuqVuDVB:1\"\n        }\n    };\n\nvar fields = {\n    \"objectType\":\"HierarchicalRequirement\",\n    \"Name\": \"Github Issue # \" + data.number + \": \" + data.title,\n    \"Description\": data.url \n};\n\ntry {\n\n    var resp = SysUtility.restPost(req.localBaseUrl + 'v1/rally',null,authHeaders,fields);\n    resp = JSON.parse(resp);\n    log.debug(JSON.stringify(resp));\n    if (resp.CreateResult){\n        if (resp.CreateResult.Errors && resp.CreateResult.Errors.length > 0){\n            log.error('Error from Rally ' + resp.CreateResult.Errors.join(','));\n            row.ac_id = 'ERROR';\n        }\n    \n        if (resp.CreateResult.Warnings && resp.CreateResult.Warnings.length > 0){\n            log.error('Error from Rally ' + resp.CreateResult.Errors.join(','));\n        }\n        if (resp.CreateResult && resp.CreateResult.Object){\n            row.ac_id = resp.CreateResult.Object.ObjectUUID;\n        }\n    } else {\n        row.ac_id = 'NO RESULT'\n    }\n\n    \n} catch (e){\n    row.ac_id = 'ERROR';\n    log.error('ERROR: ' + e);\n}\n",
+        "rule_text2": null,
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": "Add User Story to Rally",
+        "auto_name": "Event: var data = JSON.parse(row.github_data),\n    authHeaders = {\n        \"headers\":{\n            \"Authorization\":\"CALiveAPICreator GdoHMz3k15Yhvu...",
+        "verbs": "INSERT",
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": false,
+        "project_ident": 2200,
+        "ruletype_ident": 7,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.Rules/2100",
+          "checksum": "A:74cf700622230577"
+        },
+        "RuleTopics": []
+      }
+    ],
+    "ApiKeys": [
+      {
+        "ident": 2201,
+        "ts": "2017-10-16T18:13:58.017+00:00",
+        "name": "Admin key",
+        "description": "Created as part of this API. Feel free to change or delete this auth token.",
+        "apikey": "GdoHMz3k15YhvuqVuDVB",
+        "status": "A",
+        "expiration": null,
+        "logging": "*=FINE",
+        "user_identifier": null,
+        "data": null,
+        "origin": null,
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ApiKeys/2201",
+          "checksum": "A:75e1d343b9d71383"
+        }
+      },
+      {
+        "ident": 2309,
+        "ts": "2017-10-17T13:37:57.361+00:00",
+        "name": "Timer key",
+        "description": null,
+        "apikey": "TimerKey",
+        "status": "A",
+        "expiration": null,
+        "logging": "*=FINE",
+        "user_identifier": null,
+        "data": null,
+        "origin": null,
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ApiKeys/2309",
+          "checksum": "A:32712ec965b483c8"
+        }
+      }
+    ],
+    "ApiVersions": [
+      {
+        "ident": 2200,
+        "ts": "2017-10-16T18:13:58.17+00:00",
+        "name": "v1",
+        "comments": null,
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ApiVersions/2200",
+          "checksum": "A:edf36abc4c150add"
+        },
+        "Resources": [
+          {
+            "ident": 2202,
+            "ts": "2017-10-17T05:20:26.378+00:00",
+            "resource_type_ident": 1,
+            "prefix": "main",
+            "table_name": "object_link",
+            "name": "linkedObject",
+            "description": null,
+            "is_collection": "Y",
+            "join_condition": null,
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": null,
+            "filter_code": null,
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": null,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": null,
+            "apiversion_ident": 2200,
+            "@metadata": {
+              "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2202",
+              "checksum": "A:3f3250f0f0f8b770"
+            },
+            "ResourceAttributes": [
+              {
+                "ident": 2101,
+                "ts": "2017-10-17T05:48:03.835+00:00",
+                "name": "github_id",
+                "description": null,
+                "column_name": "github_id",
+                "formula": null,
+                "is_defined_key_part": true,
+                "resource_ident": 2202,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2101",
+                  "checksum": "A:471a2de65bdb1735"
+                }
+              },
+              {
+                "ident": 2102,
+                "ts": "2017-10-17T05:55:27.966+00:00",
+                "name": "github_data",
+                "description": null,
+                "column_name": "github_data",
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2202,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2102",
+                  "checksum": "A:fe4e7c07672ce8dc"
+                }
+              },
+              {
+                "ident": 2103,
+                "ts": "2017-10-17T06:37:28.038+00:00",
+                "name": "ac_id",
+                "description": null,
+                "column_name": "ac_id",
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2202,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2103",
+                  "checksum": "A:4ebefa3d6815cc3c"
+                }
+              }
+            ]
+          },
+          {
+            "ident": 2100,
+            "ts": "2017-10-16T18:14:36.324+00:00",
+            "resource_type_ident": 3,
+            "prefix": null,
+            "table_name": null,
+            "name": "githubIssue",
+            "description": null,
+            "is_collection": "Y",
+            "join_condition": null,
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": "var org = \"MyOrgOrUser\",\n    repo = \"myRepoName\",\n    headers = {\n        headers: {\n            'Accept': 'application/vnd.github.v3+json',\n            'User-Agent': 'myusername',\n            'Authorization': 'Basic base64encodedusername:password' \n        }\n    }; \n\nvar githubIssueBase = 'https://api.github.com/repos/' + org + '/' + repo + '/issues';\n\n/* TODO - Validate that these are parameters that the GitHub API expect */\nvar params = JSON.parse(req.urlParameters);\nlog.debug('params ' + req.urlParameters);\nif (req.verb === 'GET'){\n    var resp = SysUtility.restGet(githubIssueBase,params,headers);\n    return JSON.parse(resp);\n}\n\n\nif (req.verb === 'POST'){\n    var data = JSON.parse(req.json);\n    var id = data.id;\n    if (!id){\n        throw ('id parameter required for POST.')\n    }\n    log.debug(githubIssueBase + '/' + id);\n    var resp = SysUtility.restPatch(githubIssueBase + '/' + id, null, headers, data);\n    return JSON.parse(resp);\n} \nreturn {};\n\n\n\n",
+            "filter_code": null,
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": null,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": null,
+            "apiversion_ident": 2200,
+            "@metadata": {
+              "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2100",
+              "checksum": "A:b1dad48900351017"
+            },
+            "ResourceAttributes": []
+          },
+          {
+            "ident": 2200,
+            "ts": "2017-10-17T04:05:30.716+00:00",
+            "resource_type_ident": 3,
+            "prefix": null,
+            "table_name": null,
+            "name": "rally",
+            "description": null,
+            "is_collection": "Y",
+            "join_condition": null,
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": "/* this expects the following parameters: \n    objectType (required) - the object type that is being retrieved, created or updated\n    id (optional) - only required for an update\n    fetch - fetch list for GET\n    query - query for GET\n    pagesize = pagesize for GET\n    start = start index for GET (1-based),\n    payload (for posts) that contains objectType and data\n*/\n\nvar params = JSON.parse(req.urlParameters) || {},\n    data = JSON.parse(req.json) || {};\n/* Validate required parameters that the Rally API expects */\n\n\nvar objectType = params.objectType || data.objectType,\n    headers = {\n        headers: {\n            'ZSessionID': '_MyAPIKEY'\n        }\n    },\n    project = '/project/69318792140'; \n\nif (!objectType){\n    throw ('objectType parameter required for rally resource.');\n}\n\nvar rallyBase = 'https://rally1.rallydev.com/slm/webservice/v2.0/' + objectType;\nlog.debug('rallyBaseUrl ' + rallyBase);\n/* TODO - Validate that these are parameters that the Rally API expects */\nif (req.verb === 'GET'){\n    var resp = SysUtility.restGet(rallyBase,params,headers);\n    return JSON.parse(resp);\n}\n\nif (req.verb === 'POST'){\n    var id = params.id;\n    var data = JSON.parse(req.json),\n        urlSuffix = '/';\n    \n    if (data.objectType){\n        delete data.objectType; \n    }\n    if (!id){\n        /* then we are creating a story */\n        urlSuffix += 'create';\n        data.Project = project;  /* TODO: this is hardcoded and could be configurable someday*/\n    } else {\n        /* we are updating */\n        urlSuffix += id;\n    }\n    var payload = {};\n    payload[objectType] = data;\n    log.debug('url suffix ' + urlSuffix + ' ' + JSON.stringify(data));\n    var resp = SysUtility.restPost(rallyBase + urlSuffix, null, headers, payload);\n    return JSON.parse(resp);\n} \n\nreturn {};\n",
+            "filter_code": null,
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": null,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": null,
+            "apiversion_ident": 2200,
+            "@metadata": {
+              "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2200",
+              "checksum": "A:f432871b455fa3cc"
+            },
+            "ResourceAttributes": []
+          },
+          {
+            "ident": 2201,
+            "ts": "2017-10-17T04:37:31.189+00:00",
+            "resource_type_ident": 3,
+            "prefix": null,
+            "table_name": null,
+            "name": "syncGithubIssues",
+            "description": null,
+            "is_collection": "Y",
+            "join_condition": null,
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": "var baseUrl = \"http://localhost:8080/rest/default/ghbrly/v1/\";\n\nvar url = baseUrl + \"githubIssue\";\nvar authHeaders = {\n    \"headers\":{\"Authorization\": \"CALiveAPICreator GdoHMz3k15YhvuqVuDVB:1\"}\n};\nlog.debug('urlParams' + req.urlParameters);\nvar urlParams = JSON.parse(req.urlParameters) || {};\n\nif (!urlParams.lastRun){\n    throw(\"Please provide last run date.\");\n}\n\nvar params = {\n    \"since\": urlParams.lastRun,\n    \"filter\":\"all\",\n    \"state\":\"open\"\n};\n\nvar recent_issues = SysUtility.restGet(baseUrl + 'githubIssue', params, authHeaders);\nrecent_issues = JSON.parse(recent_issues);\n\nif (recent_issues && recent_issues.length > 0){\n    /* this will do a merge insert so it will insert new ones only */\n    var objectLinkUrl = baseUrl + \"linkedObject\";\n    var resp = SysUtility.restPut(objectLinkUrl,{},authHeaders,recent_issues);\n    return JSON.parse(resp);\n} \nreturn {\"message\": \"No Github Issues Found\"}\n\n ",
+            "filter_code": null,
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": null,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": null,
+            "apiversion_ident": 2200,
+            "@metadata": {
+              "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2201",
+              "checksum": "A:320428c853768256"
+            },
+            "ResourceAttributes": []
+          },
+          {
+            "ident": 2203,
+            "ts": "2017-10-17T06:24:52.764+00:00",
+            "resource_type_ident": 3,
+            "prefix": null,
+            "table_name": null,
+            "name": "syncRallyArtifacts",
+            "description": null,
+            "is_collection": "Y",
+            "join_condition": null,
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": "var baseUrl = \"http://localhost:8080/rest/default/ghbrly/v1/\";\n\nvar url = baseUrl + \"rally\";\nvar authHeaders = {\n    \"headers\":{\"Authorization\": \"CALiveAPICreator GdoHMz3k15YhvuqVuDVB:1\"}\n};\n\nvar urlParams = JSON.parse(req.urlParameters) || {};\n\nif (!urlParams.lastRun){\n    throw(\"Please provide last run date.\");\n}\n\nvar params = {\n    \"objectType\":\"HierarchicalRequirement\",\n    \"query\": '(LastUpdateDate > \"' + urlParams.lastRun + '\")',\n    \"fetch\":\"ObjectUUID,ScheduleState\"\n};\n\nvar queryResult = SysUtility.restGet(url, params, authHeaders);\nqueryResult = JSON.parse(queryResult);\n\nvar results = queryResult && queryResult.QueryResult && queryResult.QueryResult.Results || [];\nlog.debug('results count: ' + results.length);\n\nvar updates = 0;\nfor (var i=0; i<results.length; i++){\n    var params = {\n        \"sysfilter\":\"equal(ac_id:'\" + results[i].ObjectUUID + \"')\"\n    };\n   var match = SysUtility.getResource('linkedObject',params);\n   var githubId = null;\n   if (match && match.length > 0){\n       /* there should only be one */\n       githubId = match[0].github_id;\n   }\n   \n   /* This is where there could be more efficient refactoring to \n      figure out which fields to update \n      */ \n   var state=\"open\";\n   if (results[i].ScheduleState === \"Accepted\"){\n        state=\"closed\";  \n   } \n   \n   if (githubId){\n       var payload = {\n           \"id\":githubId,\n           \"state\": state \n       };\n       try {\n            var resp = SysUtility.restPost(baseUrl + 'githubIssue', null, authHeaders, payload);\n            log.debug('resp ' + resp); \n            updates++;\n       } catch (e){\n          log.error('ERROR updating github id ' + githubId + ': ' + e); \n       }\n      \n   }\n}\nreturn {\"message\": updates + \" updates made.\"};\n\n\n ",
+            "filter_code": null,
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": null,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": null,
+            "apiversion_ident": 2200,
+            "@metadata": {
+              "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2203",
+              "checksum": "A:e25b05bc55b9ca87"
+            },
+            "ResourceAttributes": []
+          }
+        ]
+      }
+    ],
+    "Applications": [],
+    "Connections": [],
+    "DbaseSchemas": [
+      {
+        "ident": 2200,
+        "name": "Managed database: rmlmy",
+        "comments": "Created using API Creation Wizard - Managed Data API",
+        "url": "jdbc:derby:directory:ManagedData;create=true",
+        "catalog_name": null,
+        "schema_name": "rmlmy",
+        "user_name": "rmlmy",
+        "password": null,
+        "salt": null,
+        "active": true,
+        "status": null,
+        "dbasetype_ident": 17,
+        "prefix": "main",
+        "datasource_name": null,
+        "schema_editable": true,
+        "role_strategy": "simplicity",
+        "table_includes": null,
+        "proc_includes": null,
+        "table_excludes": null,
+        "proc_excludes": null,
+        "max_connections": 20,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.DbaseSchemas/2200",
+          "checksum": "A:ab39b2d28b4dabaa"
+        },
+        "NonPersistentAttributes": [],
+        "TableInfos": [],
+        "ViewInfos": []
+      }
+    ],
+    "EventHandlers": [
+      {
+        "ident": 2101,
+        "ts": "2017-10-17T05:23:00.667+00:00",
+        "name": "Event sdu",
+        "description": null,
+        "code": "if (req.verb === 'PUT' && req.resourceName === 'linkedObject'){\n    var data = JSON.parse(json);\n    var newData = [];\n    for (var i=0; i<data.length; i++){\n        newData.push({\n            \"github_id\":data[i].number,\n            \"github_data\":JSON.stringify(data[i]),\n            \"@metadata\":{\"action\":\"MERGE_INSERT\", \"key\":\"github_id\"}\n        });\n    }\n    json = JSON.stringify(newData); \n}",
+        "active": true,
+        "enabled_verbs": null,
+        "resource_name_pattern": null,
+        "eventtype_ident": 1,
+        "code_type": "Javascript",
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.EventHandlers/2101",
+          "checksum": "A:6dedaded34c9fee4"
+        }
+      }
+    ],
+    "Functions": [],
+    "Handlers": [],
+    "Listeners": [],
+    "NamedFilters": [],
+    "NamedSorts": [],
+    "ProjectLibraries": [
+      {
+        "ident": 2101,
+        "ts": "2017-10-17T05:15:58.977+00:00",
+        "logic_library_ident": 500,
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ProjectLibraries/2101",
+          "checksum": "A:e506921269640761"
+        },
+        "Library": {
+          "ident": 500,
+          "name": "Moment.js (with Locales)",
+          "@metadata": {
+            "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ProjectLibraries.Library/500",
+            "checksum": "A:fff047c90259c98f"
+          }
+        }
+      }
+    ],
+    "ProjectOptions": [],
+    "ProjectProblems": [],
+    "Relationships": [],
+    "Roles": [
+      {
+        "ident": 2200,
+        "ts": "2017-10-16T18:13:58.054+00:00",
+        "name": "API Documentation",
+        "description": "This role is special and is used when generating OpenAPI(Swagger) documentation. It is recognized by the name special name 'API Documentation' and used only for documentation calls.\n Any Resources, Tables, Views, Procedures etc. that are defined and enabled by this role are used to generate the OpenAPI(Swagger) documentation.\n If this role is assigned to a user it will NOT be used for execution permissions.\n If this role is removed or otherwise unavailable, the Swagger/OpenAPI documentation will be nothing more that a name and version.",
+        "default_table_permission": "A",
+        "default_view_permission": "R",
+        "default_apivisibility": "TVPRMF",
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.Roles/2200",
+          "checksum": "A:1f87663a908df6e7"
+        },
+        "ApiKeyRoles": [],
+        "ApiVisibility": [],
+        "PermissionData": [],
+        "TablePermissions": []
+      },
+      {
+        "ident": 2201,
+        "ts": "2017-10-16T18:13:58.061+00:00",
+        "name": "Full access",
+        "description": "Full access to everything in this project",
+        "default_table_permission": "A",
+        "default_view_permission": "R",
+        "default_apivisibility": "TVPRMF",
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.Roles/2201",
+          "checksum": "A:db044e85613551d0"
+        },
+        "ApiKeyRoles": [
+          {
+            "ident": 2202,
+            "ts": "2017-10-16T18:13:58.073+00:00",
+            "apikey_ident": 2201,
+            "role_ident": 2201,
+            "@metadata": {
+              "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2202",
+              "checksum": "A:57cf27102475e9a7"
+            }
+          },
+          {
+            "ident": 2311,
+            "ts": "2017-10-17T13:38:14.08+00:00",
+            "apikey_ident": 2309,
+            "role_ident": 2201,
+            "@metadata": {
+              "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2311",
+              "checksum": "A:067ec4ca8e09c7ee"
+            }
+          }
+        ],
+        "ApiVisibility": [],
+        "PermissionData": [],
+        "TablePermissions": []
+      },
+      {
+        "ident": 2202,
+        "ts": "2017-10-16T18:13:58.065+00:00",
+        "name": "Read only",
+        "description": "Read-only access to everything in this project",
+        "default_table_permission": "R",
+        "default_view_permission": "R",
+        "default_apivisibility": "TVPRMF",
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.Roles/2202",
+          "checksum": "A:718a0edbfba74940"
+        },
+        "ApiKeyRoles": [],
+        "ApiVisibility": [],
+        "PermissionData": [],
+        "TablePermissions": []
+      }
+    ],
+    "ScheduleItems": [
+      {
+        "ident": 2000,
+        "ts": "2017-10-17T05:10:24.297+00:00",
+        "name": "Sync Github Issues to Rally",
+        "code": "var baseUrl = \"http://localhost:8080/rest/default/ghbrly/v1/\";\n\nvar url = baseUrl + \"syncGithubIssues\";\nvar authHeaders = {\n    \"headers\":{\"Authorization\": \"CALiveAPICreator TimerKey:1\"}\n};\n\n/* Todo - Max has a better way to get the last time something ran */\nvar sinceDate = moment(new Date());\nsinceDate.subtract(5,'minutes');\nvar params = {\n    lastRun: sinceDate.toISOString()\n};\n\nlog.debug('params' + JSON.stringify(params));\nvar resp = timerUtil.restGet(url,params,authHeaders);\nlog.debug('response ' + resp);\n\n",
+        "comments": "",
+        "is_active": true,
+        "start_time": null,
+        "end_time": null,
+        "no_overlap": true,
+        "num_servers": 0,
+        "crontab": "0 /4 * * * ? *",
+        "log_error_only": false,
+        "logging_level": 4,
+        "max_log_age": 2592000,
+        "schedule_type_ident": 2,
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ScheduleItems/2000",
+          "checksum": "A:43293e509982d2d4"
+        }
+      },
+      {
+        "ident": 2001,
+        "ts": "2017-10-17T12:55:10.793+00:00",
+        "name": "Sync Rally Updates",
+        "code": "var baseUrl = \"http://localhost:8080/rest/default/ghbrly/v1/\";\n\nvar url = baseUrl + \"syncRallyArtifacts\";\nvar authHeaders = {\n    \"headers\":{\"Authorization\": \"CALiveAPICreator TimerKey:1\"}\n};\n\n/* Todo - Max has a better way to get the last time something ran */\nvar sinceDate = moment(new Date());\nsinceDate.subtract(5,'minutes');\n\nvar params = {\n    \"lastRun\":sinceDate.toISOString()\n};\nvar resp = timerUtil.restGet(url,params,authHeaders);\nlog.debug('response ' + resp);\n",
+        "comments": "",
+        "is_active": true,
+        "start_time": null,
+        "end_time": null,
+        "no_overlap": false,
+        "num_servers": 0,
+        "crontab": "0 2/4 * * * ? *",
+        "log_error_only": false,
+        "logging_level": 4,
+        "max_log_age": 2592000,
+        "schedule_type_ident": 2,
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.ScheduleItems/2001",
+          "checksum": "A:e0c850d0b0a92c40"
+        }
+      }
+    ],
+    "Users": [
+      {
+        "ident": 2201,
+        "ts": "2017-10-16T18:13:58.135+00:00",
+        "name": "admin",
+        "fullname": "Admin Account with full access",
+        "email": null,
+        "status": "A",
+        "roles": "Full access",
+        "data": null,
+        "comments": null,
+        "apikey_lifespan": null,
+        "password_hash": "WTPNCXh9CHJlYmNCPHT4OcLBkhQ6CLK8nGCP1UPhFYh5hFaWS0MRqrbFy6JmDuTVRFFGZEqtX23r/OvUyhskuA==",
+        "password_salt": "UqR4gmpn1lYOIPhHTaOFh7OaEcDwtNQPUjxJeV1D",
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.Users/2201",
+          "checksum": "A:ce1cdda16133fc48"
+        }
+      },
+      {
+        "ident": 2200,
+        "ts": "2017-10-16T18:13:58.087+00:00",
+        "name": "demo",
+        "fullname": "Demo Account with full access",
+        "email": null,
+        "status": "A",
+        "roles": "Full access",
+        "data": null,
+        "comments": null,
+        "apikey_lifespan": null,
+        "password_hash": "C2+kht4VgNV+tLHGiRFi33MnDjMB5GIltR5da+RZPMIBBUOPriYy37iPoiCeW5LgnZ9ZlCd+Vv7mBI1cjRQbPw==",
+        "password_salt": "xmyXvhePOLDH/r7OaZYITnsMSxi10ufu1Io5uZ/a",
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.Users/2200",
+          "checksum": "A:e99144ec2eb20059"
+        }
+      },
+      {
+        "ident": 2202,
+        "ts": "2017-10-16T18:13:58.15+00:00",
+        "name": "guest",
+        "fullname": "Guest Account with read-only access",
+        "email": null,
+        "status": "A",
+        "roles": "Read only",
+        "data": null,
+        "comments": null,
+        "apikey_lifespan": null,
+        "password_hash": "8bHEHsDoSm6DrMtYF8YtBhEwkiosh9ecfyzYTCmyRFgXdxsy9QQ+RXS2VOkuMpoA/UsWkZ8dPCSykkrfFUbShw==",
+        "password_salt": "lVa4v12FlLaXYhIe8EYXGmAIZHF570V3w7+cfRC7",
+        "project_ident": 2200,
+        "@metadata": {
+          "href": "http://localhost:8080/rest/abl/admin/v2/ProjectExport.Users/2202",
+          "checksum": "A:5bb1259d4a10f3ba"
+        }
+      }
+    ]
+  }
+]
